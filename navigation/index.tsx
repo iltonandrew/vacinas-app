@@ -1,19 +1,8 @@
-/**
- * If you are not familiar with React Navigation, check out the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-import { Landing } from '../screens/Landing';
+import { Form, Landing, NotFoundScreen } from '../screens';
 
 export default function Navigation() {
   return (
@@ -23,12 +12,13 @@ export default function Navigation() {
   );
 }
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} headerMode="none">
       <Stack.Screen name="Root" component={Landing} />
+      <Stack.Screen name="Form" component={Form} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from '../types';
 import {
   Base,
   Background,
@@ -15,7 +17,9 @@ import {
 } from '../components/';
 import { darkGreen, lightGreen } from '../assets/colors';
 
-export function Landing() {
+export function Landing({
+  navigation,
+}: StackScreenProps<RootStackParamList, 'Root'>) {
   return (
     <Base>
       <Background colors={[darkGreen, lightGreen]}>
@@ -24,10 +28,10 @@ export function Landing() {
           <LogoText1>Vaci</LogoText1>
           <LogoText2>Vida</LogoText2>
         </LogoArea>
-        <RegisterButton onPress={() => undefined}>
+        <RegisterButton onPress={() => navigation.replace('Form')}>
           <RegisterButtonText>Faça seu Pré-cadastro!</RegisterButtonText>
         </RegisterButton>
-        <SyncWrapper>
+        <SyncWrapper onPress={() => navigation.replace('NotFound')}>
           <SyncImage source={require('../assets/images/sync.png')} />
           <SyncTextWrapper>
             <SyncText>Realizou o cadastro offline?</SyncText>
