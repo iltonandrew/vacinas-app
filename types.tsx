@@ -8,6 +8,8 @@ export type RootStackParamList = {
   NotFound: undefined;
   StatusBar: undefined;
   Form: undefined;
+  FormEnd: undefined;
+  SyncScreen: undefined;
 };
 
 export type BottomTabParamList = {

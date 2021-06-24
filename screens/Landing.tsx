@@ -22,7 +22,7 @@ export function Landing({
 }: StackScreenProps<RootStackParamList, 'Root'>) {
   return (
     <Base>
-      <Background colors={[darkGreen, lightGreen]}>
+      <Background colors={[lightGreen, darkGreen, darkGreen, darkGreen]}>
         <LogoArea>
           <Logo source={require('../assets/images/syringe.png')} />
           <LogoText1>Vaci</LogoText1>
@@ -31,7 +31,7 @@ export function Landing({
         <RegisterButton onPress={() => navigation.replace('Form')}>
           <RegisterButtonText>Faça seu Pré-cadastro!</RegisterButtonText>
         </RegisterButton>
-        <SyncWrapper onPress={() => navigation.replace('NotFound')}>
+        <SyncWrapper onPress={() => navigation.replace('SyncScreen')}>
           <SyncImage source={require('../assets/images/sync.png')} />
           <SyncTextWrapper>
             <SyncText>Realizou o cadastro offline?</SyncText>
