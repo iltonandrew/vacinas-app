@@ -43,3 +43,12 @@ export const registerUser = (data: DataType) => {
     .then((response) => console.log(response))
     .catch((error) => console.error(error));
 };
+
+export const getAddressFromPostalCode = (postalCode: string) =>
+  api
+    .patch('address/postal-code', { postalCode })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
+    .catch((error) => console.error(error));
