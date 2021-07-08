@@ -4,18 +4,7 @@ import { Alert } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { RootStackParamList } from '../types';
 import {
-  Base,
   Background,
-  RegisterButton,
-  RegisterButtonText,
-  Logo,
-  LogoArea,
-  LogoText1,
-  LogoText2,
-  SyncWrapper,
-  SyncText,
-  SyncTextWrapper,
-  SyncImage,
   FormInput,
   FormBase,
   FormHeader,
@@ -26,17 +15,19 @@ import {
   GoBackButtonText,
   SubmitButton,
   SubmitButtonText,
+  SaveButton,
+  SaveButtonText,
 } from '../components/';
 import { darkBlue, darkGreen, lightGreen } from '../assets/colors';
+import { registerUser, DataType } from '../services/api';
+import { storeUser } from '../services/storage';
 
 export function FormEnd({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'FormEnd'>) {
-  const [showAlert, setShowALert] = React.useState(false);
   const [showSuccess, setShowSuccess] = React.useState(false);
-  const [shouldContinue, setShouldContinue] = React.useState(false);
-  const { fields } = route.params;
+  const { data }: any = route.params;
   return (
     <FormBase>
       <Background colors={[lightGreen, darkGreen, darkGreen, darkGreen]}>
@@ -44,120 +35,127 @@ export function FormEnd({
           <FormHeaderImage source={require('../assets/images/form.png')} />
           <FormHeaderText>Confirme seu cadastro</FormHeaderText>
         </FormHeader>
+        {console.log(data)}
         <FormInput
-          placeholder="Nome Completo"
+          placeholder="Nome"
           keyboardType="name-phone-pad"
-          value={fields.name}
+          value={data.user.firstName}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Sobrenome"
+          keyboardType="name-phone-pad"
+          value={data.user.lastName}
           editable={false}
         />
         <FormInput
           placeholder="CPF"
           keyboardType="numeric"
-          value={fields.cpf}
+          value={data.user.cpf}
           editable={false}
         />
         <FormInput
-          placeholder="País"
-          keyboardType="name-phone-pad"
-          value={fields.country}
-          editable={false}
-        />
-        <FormInput
-          placeholder="Estado"
-          keyboardType="name-phone-pad"
-          value={fields.state}
-          editable={false}
-        />
-        <FormInput
-          placeholder="Município"
-          keyboardType="name-phone-pad"
-          value={fields.city}
-          editable={false}
-        />
-        <FormInput
-          placeholder="Logradouro"
-          keyboardType="name-phone-pad"
-          value={fields.address}
-          editable={false}
-        />
-        <FormInput
-          placeholder="Número"
+          placeholder="CNS"
           keyboardType="numeric"
-          value={fields.number}
+          value={data.user.cns}
           editable={false}
         />
         <FormInput
-          placeholder="Complemento"
+          placeholder="Nome da mãe"
           keyboardType="name-phone-pad"
-          value={fields.complement}
+          value={data.user.motherName}
           editable={false}
         />
         <FormInput
-          placeholder="Bairro"
+          placeholder="Raça"
           keyboardType="name-phone-pad"
-          value={fields.district}
+          value={data.user.race}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Gênero"
+          keyboardType="name-phone-pad"
+          value={data.user.gender}
           editable={false}
         />
         <FormInput
           placeholder="CEP"
           keyboardType="numeric"
-          value={fields.cep}
+          value={data.address.postalCode}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Estado"
+          keyboardType="name-phone-pad"
+          value={data.address.state}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Município"
+          keyboardType="name-phone-pad"
+          value={data.address.city}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Bairro"
+          keyboardType="name-phone-pad"
+          value={data.address.neighborhood}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Endereço"
+          keyboardType="name-phone-pad"
+          value={data.address.streetName}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Número"
+          keyboardType="numeric"
+          value={data.address.streetNumber}
+          editable={false}
+        />
+        <FormInput
+          placeholder="Complemento"
+          keyboardType="name-phone-pad"
+          value={data.address.complement}
           editable={false}
         />
         <FormInput
           placeholder="E-mail"
           keyboardType="email-address"
-          value={fields.email}
+          value={data.user.email}
           editable={false}
         />
         <FormInput
           placeholder="Telefone Celular"
           keyboardType="numeric"
-          value={fields.phone}
-          editable={false}
-        />
-        <FormInput
-          placeholder="Data de Nascimento"
-          keyboardType="number-pad"
-          value={fields.birth}
+          value={data.user.phone}
           editable={false}
         />
         <SubmitButtonsWrapper>
           <GoBackButton onPress={() => navigation.goBack()}>
             <GoBackButtonText>Voltar</GoBackButtonText>
           </GoBackButton>
+          <SaveButton
+            onPress={async () => {
+              await storeUser(data);
+              setShowSuccess(true);
+            }}
+          >
+            <SaveButtonText>Armazenar Usuário!</SaveButtonText>
+          </SaveButton>
           <SubmitButton
-            onPress={() =>
-              shouldContinue ? setShowSuccess(true) : setShowALert(true)
-            }
+            onPress={async () => {
+              registerUser(data);
+              setShowSuccess(true);
+            }}
           >
             <SubmitButtonText>Enviar!</SubmitButtonText>
           </SubmitButton>
         </SubmitButtonsWrapper>
         <AwesomeAlert
-          show={showAlert}
-          title="Conexão não encontrada!"
-          message="Não se preocupe, seus dados foram salvos! Será possivel enviá-los quando tiver uma conexão disponível clicando em sincronizar com banco de dados"
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          showCancelButton={true}
-          showConfirmButton={true}
-          cancelText="Tentar novamente"
-          confirmText="Enviar depois"
-          onDismiss={() => setShowALert(false)}
-          confirmButtonColor={darkGreen}
-          cancelButtonColor={darkBlue}
-          onCancelPressed={() => {
-            setShouldContinue(true);
-            setShowALert(false);
-          }}
-          onConfirmPressed={() => {
-            navigation.replace('Root');
-          }}
-        />
-        <AwesomeAlert
           show={showSuccess}
-          title="Cadastro enviado com sucesso!"
+          title="Operação Realizada!"
           closeOnTouchOutside={false}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}

@@ -1,49 +1,32 @@
 import * as React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Alert } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { RootStackParamList } from '../types';
 import {
-  Base,
   Background,
-  RegisterButton,
-  RegisterButtonText,
-  Logo,
-  LogoArea,
-  LogoText1,
-  LogoText2,
-  SyncWrapper,
-  SyncText,
-  SyncTextWrapper,
-  SyncImage,
-  FormInput,
-  FormBase,
-  FormHeader,
-  FormHeaderText,
-  FormHeaderImage,
-  SubmitButtonsWrapper,
-  GoBackButton,
-  GoBackButtonText,
-  SubmitButton,
   SubmitButtonText,
   SyncBase,
   SyncInfoButton,
+  SaveButton,
+  SaveButtonText,
   SyncReturnButton,
   SyncReturnButtonText,
 } from '../components/';
 import { darkBlue, darkGreen, lightGreen } from '../assets/colors';
+import { retrieveUsers, cleanStore } from '../services/storage';
+import { DataType } from '../services/api';
+import { useState } from 'react';
+import { api } from '../services/api';
 
 export function SyncScreen({
   navigation,
   route,
 }: StackScreenProps<RootStackParamList, 'FormEnd'>) {
+  const [data, setData] = useState<DataType>();
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [showAlert, setShowALert] = React.useState(false);
   const [hideFirst, setHideFirst] = React.useState(false);
   const [willHideFirst, setWillHideFirst] = React.useState(false);
-  const [hideSecond, setHideSecond] = React.useState(false);
-  const [willHideSecond, setWillHideSecond] = React.useState(false);
-  const [hideThird, setHideThird] = React.useState(false);
-  const [willHideThird, setWillHideThird] = React.useState(false);
   const [progress, setProgress] = React.useState(true);
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -54,10 +37,19 @@ export function SyncScreen({
       clearTimeout(timeout);
     };
   }, [progress]);
+
   return (
     <SyncBase>
       <Background colors={[lightGreen, darkGreen, darkGreen, darkGreen]}>
-        {!hideFirst && (
+        <SyncReturnButton
+          onPress={async () => {
+            setData(await retrieveUsers());
+            setDataLoaded(true);
+          }}
+        >
+          <SyncReturnButtonText>Carregar usuários</SyncReturnButtonText>
+        </SyncReturnButton>
+        {dataLoaded && data && !hideFirst && (
           <SyncInfoButton
             onPress={() => {
               setProgress(true);
@@ -65,32 +57,8 @@ export function SyncScreen({
               setWillHideFirst(true);
             }}
           >
-            <SubmitButtonText>Registrar Ilton Andrew</SubmitButtonText>
-            <SubmitButtonText>CPF: 426.XXX.XXX-XX</SubmitButtonText>
-          </SyncInfoButton>
-        )}
-        {!hideSecond && (
-          <SyncInfoButton
-            onPress={() => {
-              setProgress(true);
-              setShowALert(true);
-              setWillHideSecond(true);
-            }}
-          >
-            <SubmitButtonText>Registrar João Cortez</SubmitButtonText>
-            <SubmitButtonText>CPF: 384.XXX.XXX-XX</SubmitButtonText>
-          </SyncInfoButton>
-        )}
-        {!hideThird && (
-          <SyncInfoButton
-            onPress={() => {
-              setProgress(true);
-              setShowALert(true);
-              setWillHideThird(true);
-            }}
-          >
-            <SubmitButtonText>Registrar Rodrigo Magaldi</SubmitButtonText>
-            <SubmitButtonText>CPF: 518.XXX.XXX-XX</SubmitButtonText>
+            <SubmitButtonText>{`Registrar ${data.user.firstName} ${data.user.lastName}`}</SubmitButtonText>
+            <SubmitButtonText>{`CPF: ${data.user.cpf}`}</SubmitButtonText>
           </SyncInfoButton>
         )}
         <SyncReturnButton onPress={() => navigation.replace('Root')}>
@@ -111,8 +79,6 @@ export function SyncScreen({
           confirmButtonColor={darkGreen}
           onConfirmPressed={() => {
             willHideFirst && setHideFirst(true);
-            willHideSecond && setHideSecond(true);
-            willHideThird && setHideThird(true);
             setShowALert(false);
           }}
         />
