@@ -112,31 +112,32 @@ export const FormHeaderImage = styled.Image`
 
 export const SubmitButtonsWrapper = styled.View`
   margin-top: 12px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-direction: row;
   /* align-items: center; */
 `;
 
 export const GoBackButton = styled.TouchableOpacity`
-  width: 128px;
+  width: 112px;
   background: #de6c66;
-  padding: 8px 24px;
+  padding: 4px 8px;
   border-radius: 8px;
   align-items: center;
   justify-content: space-evenly;
   margin-bottom: 24px;
   border: 2px #e31b78;
-  margin-right: 64px;
+  margin-right: 8px;
 `;
 
 export const GoBackButtonText = styled.Text`
-  font-size: 24px;
+  font-size: 16px;
   color: black;
 `;
 export const SubmitButton = styled.TouchableOpacity`
-  width: 128px;
+  width: 112px;
+  justify-content: space-evenly;
   background: #98de66;
-  padding: 8px 12px;
+  padding: 4px 8px;
   border-radius: 8px;
   align-items: center;
   margin-bottom: 24px;
@@ -144,7 +145,26 @@ export const SubmitButton = styled.TouchableOpacity`
 `;
 
 export const SubmitButtonText = styled.Text`
-  font-size: 24px;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #e31b78;
+`;
+export const SaveButton = styled.TouchableOpacity`
+  width: 112px;
+  background: #98d2eb;
+  padding: 4px 8px;
+  border-radius: 8px;
+  align-items: center;
+  margin-bottom: 24px;
+  border: 2px #e31b78;
+  margin-right: 8px;
+`;
+
+export const SaveButtonText = styled.Text`
+  font-size: 16px;
+  align-items: center;
+  text-align: center;
   color: #e31b78;
 `;
 
