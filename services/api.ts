@@ -1,25 +1,25 @@
 import axios from 'axios';
 
 export type userType = {
-  firstName: string | null;
-  lastName: string | null;
-  cpf: string | null;
-  cns: string | null;
-  email: string | null;
-  phone: string | null;
-  motherName: string | null;
-  gender: string | null;
-  race: string | null;
+  firstName: string;
+  lastName: string;
+  cpf: string;
+  cns: string;
+  email: string;
+  phone: string;
+  motherName: string;
+  gender: string;
+  race: string;
 };
 
 export type addressType = {
-  postalCode: string | null;
-  state: string | null;
-  city: string | null;
-  neighborhood: string | null;
-  streetName: string | null;
-  streetNumber: string | null;
-  complement: string | null;
+  postalCode: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  streetName: string;
+  streetNumber: string;
+  complement: string;
 };
 
 export type DataType = {
