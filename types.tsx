@@ -10,6 +10,18 @@ export type RootStackParamList = {
   Form: undefined;
   FormEnd: undefined;
   SyncScreen: undefined;
+
+  FormFirstName: undefined;
+  FormLastName: undefined;
+  FormCPF: undefined;
+  FormCNS: undefined;
+  FormMotherName: undefined;
+  FormRace: undefined;
+  FormGender: undefined;
+  FormAddress: undefined;
+  FormEmail: undefined;
+  FormPhone: undefined;
+  FormReview: undefined;
 };
 
 export type BottomTabParamList = {
