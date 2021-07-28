@@ -175,7 +175,7 @@ export function FormReview({
           placeholder={form.phone || ""}
           onChangeText={(phone) => updateFormData({ ...form, phone })}
           value={form.phone || ""}
-          keyboardType="numeric"
+          keyboardType="phone-pad"
         />
         <ScrollFormButtons
           textReturn="Voltar"

@@ -57,6 +57,7 @@ export function FormRace({
       <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
       <NextButton
         text="Próximo"
+        disabled={!race}
         onPress={() => {
           updateFormData({ ...form, race });
           console.log(form);

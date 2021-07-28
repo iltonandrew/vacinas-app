@@ -49,6 +49,7 @@ export function FormGender({
       <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
       <NextButton
         text="Próximo"
+        disabled={!gender}
         onPress={() => {
           updateFormData({ ...form, gender });
           console.log(form);

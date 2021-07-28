@@ -21,7 +21,7 @@ export function FormPhone({
         placeholder="Seu telefone"
         onChangeText={setPhone}
         value={phone}
-        keyboardType="numeric"
+        keyboardType="phone-pad"
       />
       <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
       <NextButton

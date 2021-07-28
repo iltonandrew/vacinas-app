@@ -25,6 +25,7 @@ export function FormLastName({
       <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
       <NextButton
         text="Próximo"
+        disabled={!lastName}
         onPress={() => {
           updateFormData({ ...form, lastName });
           console.log(form);

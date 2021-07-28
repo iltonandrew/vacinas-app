@@ -11,20 +11,35 @@ import { GenericButton } from "../../components/GenericButton";
 export function Sync({
   navigation,
 }: StackScreenProps<RootStackParamList, "Sync">) {
-  const [numberOfUsers, setNumberOfUsers] = useState(4);
+  const users = [
+    {
+      cpf: "49849482800",
+      firstName: "Rodrigo",
+    },
+    {
+      cpf: "12345678910",
+      firstName: "Ilton",
+    },
+    {
+      cpf: "10987654321",
+      firstName: "Gabriel",
+    },
+    {
+      cpf: "125742692370",
+      firstName: "Fabio",
+    },
+  ];
 
   return (
     <ScrollView>
       <Container>
         <Question
-          title={`${numberOfUsers} cadastros ainda não enviados para o sistema`}
+          title={`${users.length} cadastros ainda não enviados para o sistema`}
         />
-        <Card cpf="49849482800" firstName="Rodrigo" />
-        <Card cpf="49849482800" firstName="Rodrigo" />
-        <Card cpf="49849482800" firstName="Rodrigo" />
-        <Card cpf="49849482800" firstName="Rodrigo" />
-        <Card cpf="49849482800" firstName="Rodrigo" />
-        <Card cpf="49849482800" firstName="Rodrigo" />
+
+        {users.map(({ cpf, firstName }) => (
+          <Card cpf={cpf} firstName={firstName} />
+        ))}
 
         <GenericButton
           text="Enviar cadastros"

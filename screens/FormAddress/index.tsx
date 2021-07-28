@@ -13,6 +13,8 @@ import { ScrollView } from "react-native";
 import { ScrollFormButtons } from "../../components/ScrollFormButtons";
 import { NumberAndComplementInput } from "../../components/NumberAndComplementInput";
 
+import { isValidCEP } from "@brazilian-utils/brazilian-utils";
+
 export function FormAddress({
   navigation,
 }: StackScreenProps<RootStackParamList, "FormAddress">) {
@@ -26,8 +28,16 @@ export function FormAddress({
   const [streetNumber, setStreetNumber] = useState(form.streetNumber || "");
   const [complement, setComplement] = useState(form.complement || "");
 
+  const [isValidCep, setIsValidCep] = useState(isValidCEP(postalCode));
+
   const handleChangePostalCode = async (value: string) => {
     setPostalCode(value);
+
+    if (isValidCEP(value)) {
+      setIsValidCep(true);
+    } else {
+      setIsValidCep(false);
+    }
 
     if (value.length === 8) {
       const response = await getAddressFromPostalCode(value);
@@ -50,6 +60,7 @@ export function FormAddress({
           onChangeText={handleChangePostalCode}
           value={postalCode}
           keyboardType="numeric"
+          maxLength={8}
         />
         <Input
           label="Estado"
@@ -84,6 +95,9 @@ export function FormAddress({
         <ScrollFormButtons
           textReturn="Voltar"
           textNext="Próximo"
+          disabled={
+            !isValidCep || !state || !city || !streetName || !streetNumber
+          }
           onPressReturn={() => navigation.pop()}
           onPressNext={() => {
             updateFormData({

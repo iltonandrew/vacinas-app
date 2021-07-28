@@ -23,6 +23,7 @@ export function FormCNS({
       </DetailText>
       <Input
         placeholder="Seu CNS"
+        maxLength={15}
         onChangeText={setCns}
         value={cns}
         keyboardType="numeric"
