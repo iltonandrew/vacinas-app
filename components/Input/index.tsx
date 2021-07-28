@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledInput, Label } from "./styles";
+import { StyledInput, Label, Container } from "./styles";
 
 interface InputProps {
   placeholder: string;
@@ -17,7 +17,7 @@ export function Input({
   keyboardType,
 }: InputProps) {
   return (
-    <>
+    <Container>
       {label && <Label>{label}</Label>}
       <StyledInput
         keyboardType={keyboardType}
@@ -25,6 +25,6 @@ export function Input({
         onChangeText={onChangeText}
         value={value}
       />
-    </>
+    </Container>
   );
 }

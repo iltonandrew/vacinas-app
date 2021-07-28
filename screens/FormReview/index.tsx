@@ -4,6 +4,7 @@ import { ScrollView } from "react-native";
 import { Dropdown } from "../../components/Dropdown";
 import { Input } from "../../components/Input";
 import { NextButton } from "../../components/NextButton";
+import { NumberAndComplementInput } from "../../components/NumberAndComplementInput";
 import { Question } from "../../components/Question";
 import { ReturnButton } from "../../components/ReturnButton";
 import { ScrollFormButtons } from "../../components/ScrollFormButtons";
@@ -151,6 +152,16 @@ export function FormReview({
           placeholder={form.streetName || ""}
           onChangeText={(streetName) => updateFormData({ ...form, streetName })}
           value={form.streetName || ""}
+        />
+        <NumberAndComplementInput
+          numberValue={form.streetNumber || ""}
+          numberOnChangeText={(streetNumber) =>
+            updateFormData({ ...form, streetNumber })
+          }
+          complementValue={form.complement || ""}
+          complementOnChangeText={(complement) =>
+            updateFormData({ ...form, complement })
+          }
         />
         <Input
           label="Email"

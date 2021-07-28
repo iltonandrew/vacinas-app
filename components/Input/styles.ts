@@ -17,3 +17,8 @@ export const Label = styled.Text`
   margin-bottom: -30px;
   margin-top: 20px;
 `;
+
+export const Container = styled.View`
+  display: flex;
+  flex-direction: column;
+`;

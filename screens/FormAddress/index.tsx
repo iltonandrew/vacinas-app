@@ -11,6 +11,7 @@ import { useForm } from "../../hooks/useForm";
 import { getAddressFromPostalCode } from "../../services/api";
 import { ScrollView } from "react-native";
 import { ScrollFormButtons } from "../../components/ScrollFormButtons";
+import { NumberAndComplementInput } from "../../components/NumberAndComplementInput";
 
 export function FormAddress({
   navigation,
@@ -74,6 +75,12 @@ export function FormAddress({
           onChangeText={setStreetName}
           value={streetName}
         />
+        <NumberAndComplementInput
+          numberValue={streetNumber}
+          numberOnChangeText={setStreetNumber}
+          complementValue={complement}
+          complementOnChangeText={setComplement}
+        />
         <ScrollFormButtons
           textReturn="Voltar"
           textNext="Próximo"
@@ -86,6 +93,8 @@ export function FormAddress({
               city,
               neighborhood,
               streetName,
+              streetNumber,
+              complement,
             });
             navigation.push("FormEmail");
             console.log(form);
