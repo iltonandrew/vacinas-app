@@ -22,6 +22,9 @@ export type RootStackParamList = {
   FormEmail: undefined;
   FormPhone: undefined;
   FormReview: undefined;
+
+  Home: undefined;
+  Sync: undefined;
 };
 
 export type BottomTabParamList = {

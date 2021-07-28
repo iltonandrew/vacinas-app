@@ -19,6 +19,8 @@ import { FormMotherName } from "../screens/FormMotherName";
 import { FormPhone } from "../screens/FormPhone";
 import { FormRace } from "../screens/FormRace";
 import { FormReview } from "../screens/FormReview";
+import { Home } from "../screens/Home";
+import { Sync } from "../screens/Sync";
 
 export default function Navigation() {
   return (
@@ -33,7 +35,11 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} headerMode="none">
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Sync" component={Sync} />
+
       <Stack.Screen name="Root" component={Landing} />
+
       <Stack.Screen name="FormFirstName" component={FormFirstName} />
       <Stack.Screen name="FormLastName" component={FormLastName} />
       <Stack.Screen name="FormCPF" component={FormCPF} />
@@ -45,6 +51,7 @@ function RootNavigator() {
       <Stack.Screen name="FormEmail" component={FormEmail} />
       <Stack.Screen name="FormPhone" component={FormPhone} />
       <Stack.Screen name="FormReview" component={FormReview} />
+
       <Stack.Screen name="Form" component={Form} />
       <Stack.Screen name="FormEnd" component={FormEnd} />
       <Stack.Screen name="SyncScreen" component={SyncScreen} />
