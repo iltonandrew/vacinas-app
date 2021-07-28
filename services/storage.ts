@@ -37,7 +37,6 @@ export const storeUsersArray = async (userToBeStored: DataType) => {
     await AsyncStorage.setItem('@users', JSON.stringify(array)).then(() => {
       console.log('User stored, now array is:', array);
     });
-
     return array;
   } catch (e) {
     console.error(e);
