@@ -10,6 +10,7 @@ import { useForm } from "../../hooks/useForm";
 
 import { getAddressFromPostalCode } from "../../services/api";
 import { ScrollView } from "react-native";
+import { ScrollFormButtons } from "../../components/ScrollFormButtons";
 
 export function FormAddress({
   navigation,
@@ -73,10 +74,11 @@ export function FormAddress({
           onChangeText={setStreetName}
           value={streetName}
         />
-        <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
-        <NextButton
-          text="Próximo"
-          onPress={() => {
+        <ScrollFormButtons
+          textReturn="Voltar"
+          textNext="Próximo"
+          onPressReturn={() => navigation.pop()}
+          onPressNext={() => {
             updateFormData({
               ...form,
               postalCode,

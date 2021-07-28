@@ -6,6 +6,7 @@ import { Input } from "../../components/Input";
 import { NextButton } from "../../components/NextButton";
 import { Question } from "../../components/Question";
 import { ReturnButton } from "../../components/ReturnButton";
+import { ScrollFormButtons } from "../../components/ScrollFormButtons";
 import { useForm } from "../../hooks/useForm";
 import { RootStackParamList } from "../../types";
 import { Container } from "./styles";
@@ -165,10 +166,11 @@ export function FormReview({
           value={form.phone || ""}
           keyboardType="numeric"
         />
-        <ReturnButton text="Voltar" onPress={() => navigation.pop()} />
-        <NextButton
-          text="Concluir"
-          onPress={() => {
+        <ScrollFormButtons
+          textReturn="Voltar"
+          textNext="Concluir"
+          onPressReturn={() => navigation.pop()}
+          onPressNext={() => {
             console.log(form);
           }}
         />
