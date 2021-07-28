@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../types';
+import * as React from "react";
+import { StackScreenProps } from "@react-navigation/stack";
+import { RootStackParamList } from "../types";
 import {
   Base,
   Background,
@@ -14,25 +14,25 @@ import {
   SyncText,
   SyncTextWrapper,
   SyncImage,
-} from '../components/';
-import { darkGreen, lightGreen } from '../assets/colors';
+} from "../components/";
+import { darkGreen, lightGreen } from "../assets/colors";
 
 export function Landing({
   navigation,
-}: StackScreenProps<RootStackParamList, 'Root'>) {
+}: StackScreenProps<RootStackParamList, "Root">) {
   return (
     <Base>
       <Background colors={[lightGreen, darkGreen, darkGreen, darkGreen]}>
         <LogoArea>
-          <Logo source={require('../assets/images/syringe.png')} />
+          <Logo source={require("../assets/images/syringe.png")} />
           <LogoText1>Vaci</LogoText1>
           <LogoText2>Vida</LogoText2>
         </LogoArea>
-        <RegisterButton onPress={() => navigation.replace('Form')}>
+        <RegisterButton onPress={() => navigation.push("FormFirstName")}>
           <RegisterButtonText>Faça seu Pré-cadastro!</RegisterButtonText>
         </RegisterButton>
-        <SyncWrapper onPress={() => navigation.replace('SyncScreen')}>
-          <SyncImage source={require('../assets/images/sync.png')} />
+        <SyncWrapper onPress={() => navigation.replace("SyncScreen")}>
+          <SyncImage source={require("../assets/images/sync.png")} />
           <SyncTextWrapper>
             <SyncText>Realizou o cadastro offline?</SyncText>
             <SyncText>Clique aqui para enviá-lo!</SyncText>
