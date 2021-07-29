@@ -13,6 +13,10 @@
 - João Pedro de Souza Cortez
 - Rodrigo Miksian Magaldi
 
+## Backend Side
+
+You can check the backend part of this project on [this repository](https://github.com/rodmagaldi/vacinas-server)
+
 
 ## Running it locally
 
