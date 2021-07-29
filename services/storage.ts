@@ -14,7 +14,7 @@ export const storeUser = async (userToBeStored: DataType) => {
 export const retrieveUsers = async () => {
   try {
     const userArray = await AsyncStorage.getItem('@users');
-    return userArray != null ? JSON.parse(userArray) : null;
+    return userArray != null ? JSON.parse(userArray) : [];
   } catch (e) {
     console.error(e);
   }
@@ -34,9 +34,7 @@ export const storeUsersArray = async (userToBeStored: DataType) => {
     const userArray = await AsyncStorage.getItem('@users');
     !userArray ? (array = []) : (array = JSON.parse(userArray));
     array.push(userToBeStored);
-    await AsyncStorage.setItem('@users', JSON.stringify(array)).then(() => {
-      console.log('User stored, now array is:', array);
-    });
+    await AsyncStorage.setItem('@users', JSON.stringify(array));
     return array;
   } catch (e) {
     console.error(e);

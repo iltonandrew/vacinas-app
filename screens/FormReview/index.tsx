@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Alert } from 'react-native';
 import { Dropdown } from '../../components/Dropdown';
 import { Input } from '../../components/Input';
 import { NextButton } from '../../components/NextButton';
@@ -20,7 +20,46 @@ export function FormReview({
   const handleUserArray = async (user: any) => {
     console.log(form);
     storeUsersArray(user);
+    updateFormData({});
+    showAlert();
   };
+  const generateForm = (form: any) => {
+    return {
+      user: {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        cpf: form.cpf,
+        cns: form.cns,
+        email: form.email,
+        phone: form.phone,
+        motherName: form.motherName,
+        gender: form.gender,
+        race: form.race,
+      },
+      address: {
+        postalCode: form.postalCode,
+        state: form.state,
+        city: form.city,
+        neighborhood: form.neighborhood,
+        streetName: form.streetName,
+        streetNumber: form.streetNumber,
+        complement: form.complement,
+      },
+    };
+  };
+
+  const showAlert = () =>
+    Alert.alert(
+      'Dados Salvos!',
+      'Os dados do usuário foram salvos, para enviá-los basta sincronizar!',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => navigation.navigate('Home'),
+          style: 'default',
+        },
+      ]
+    );
 
   const races = [
     {
@@ -186,7 +225,7 @@ export function FormReview({
           textReturn="Voltar"
           textNext="Concluir"
           onPressReturn={() => navigation.pop()}
-          onPressNext={() => handleUserArray(form)}
+          onPressNext={() => handleUserArray(generateForm(form))}
         />
       </Container>
     </ScrollView>

@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
+import { cleanStore } from './storage';
 
 export type userType = {
   firstName?: string;
@@ -36,18 +37,18 @@ export type DataType = {
 };
 
 export const api = axios.create({
-  baseURL: "https://vacinas-app-mhanprpxzq-uc.a.run.app",
+  baseURL: 'https://vacinas-app-mhanprpxzq-uc.a.run.app',
 });
 
 export const getUsers = () =>
   api
-    .get("users")
+    .get('users')
     .then((response) => console.log(response.data))
     .catch((error) => console.error(error));
 
 export const registerUser = (data: DataType) => {
   api
-    .post("users/register/", data)
+    .post('users/register/', data)
     .then((response) => console.log(response))
     .catch((error) => console.error(error));
 };
@@ -56,11 +57,22 @@ export const getAddressFromPostalCode = async (
   postalCode: string
 ): Promise<addressReturnType | undefined> => {
   try {
-    const response = await api.patch<addressReturnType>("address/postal-code", {
+    const response = await api.patch<addressReturnType>('address/postal-code', {
       postalCode,
     });
     return response?.data;
   } catch (err) {
     console.log(err);
   }
+};
+
+export const sendUserArray = (data: Array<DataType>) => {
+  data.forEach(
+    async (user) =>
+      await api
+        .post('users/register/', user)
+        .then((response) => console.log(response))
+        .finally(() => cleanStore())
+        .catch((error) => console.error(error))
+  );
 };
