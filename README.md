@@ -5,7 +5,7 @@
 ## VaciVida - Class Project for PCS3434 and PCS3443
 
 
-## Team Members:
+### Team Members:
 - Ana Clara Forceli 
 - Fábio Bassoi Sayeg 
 - Gabriel Akio Takano Rigoli 
