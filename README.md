@@ -1,6 +1,7 @@
 # VaciVida Project
 Class Project for PCS 3343 and PCS 3434
 
+<img width="200" alt="icon" src="https://github.com/iltonandrew/vacinas-app/blob/main/assets/images/icon.png">
 
 ## Available Scripts
 
