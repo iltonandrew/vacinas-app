@@ -1,2 +1,3 @@
-# vacinas-app
-Projeto de PCS 3443 - Laboratório de Engenharia de Software
+# Projeto VaciVida
+Projeto conjunto das disciplinas PCS3343 e PCS 3434
+
